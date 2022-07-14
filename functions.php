@@ -1,6 +1,6 @@
-****FUNCTIONS.PHP FILE CODE*****
-
 <?php 
+
+require_once get_template_directory() . '/inc/class-wp-bootstrap-navwalker.php';
 
 // WP Theme Supports (Basic Theme Setup function) //
 
@@ -47,6 +47,18 @@ function vtc_nav_menu(){
 }
 
 add_action('init', 'vtc_nav_menu');
+
+//Navbar Classes Implent//
+
+function add_class_li($classes, $item, $args){
+    if(isset($args->li_class)){
+        $classess[] = $args->li_class;
+    }
+
+    return $classes;
+}
+
+add_filter( 'nav_menu_css_class', 'add_class_li', 10, 3 );
 
 // Navbar Link Menu Change // 
 
@@ -118,4 +130,91 @@ function register_widget_areas() {
   
   add_action( 'widgets_init', 'register_widget_areas' );
 
+
+// Enqueue Theme Styles //
+
+function arshathemestyle() {
+   	
+  //Main Style File//
+    
+  wp_enqueue_style( 'main-theme-css', get_template_directory_uri() . '/assets/css/style.css', array(), '1.0.0',);
+
+  // Vendor CSS Files // 
+
+  wp_enqueue_style( 'aos.css', get_template_directory_uri() . '/assets/vendor/aos/aos.css', array(), '1.0.0',);
+  wp_enqueue_style( 'bootstrap.min.css', get_template_directory_uri() . '/assets/vendor/bootstrap/css/bootstrap.min.css', array(), '1.0.0',);
+  wp_enqueue_style( 'bootstrap-icons.css', get_template_directory_uri() . '/assets/vendor/bootstrap-icons/bootstrap-icons.css', array(), '1.0.0',);
+  wp_enqueue_style( 'boxicons.min.css', get_template_directory_uri() . '/assets/vendor/boxicons/css/boxicons.min.css', array(), '1.0.0',);
+  wp_enqueue_style( 'glightbox.min.css', get_template_directory_uri() . '/assets/vendor/glightbox/css/glightbox.min.css', array(), '1.0.0',);
+  wp_enqueue_style( 'swiper-bundle.min.css', get_template_directory_uri() . '/assets/vendor/swiper/swiper-bundle.min.css', array(), '1.0.0',);
+  wp_enqueue_style( 'remixicon.css', get_template_directory_uri() . '/assets/vendor/remixicon/remixicon.css', array(), '1.0.0',);
+
+
+}
+
+add_action( 'wp_enqueue_scripts', 'arshathemestyle' );
+
+
+// Enqueue Javascripts & Jquery Files //
+
+function arshathemescripts(){
+
+//Main JS File//
+
+wp_enqueue_script( 'main.js', get_template_directory_uri() . '/assets/js/main.js', array(), '1.0.0', true );
+
+//Vendor JS Files//
+
+wp_enqueue_script( 'aos.js', get_template_directory_uri() . '/assets/vendor/aos/aos.js', array(), '1.0.0', true );
+wp_enqueue_script( 'bootstrap.bundle.min.js', get_template_directory_uri() . '/assets/vendor/bootstrap/js/bootstrap.bundle.min.js', array(), '1.0.0', true );
+wp_enqueue_script( 'glightbox.min.js', get_template_directory_uri() . '/assets/vendor/glightbox/js/glightbox.min.js', array(), '1.0.0', true );
+wp_enqueue_script( 'isotope.pkgd.min.js', get_template_directory_uri() . '/assets/vendor/isotope-layout/isotope.pkgd.min.js', array(), '1.0.0', true );
+wp_enqueue_script( 'swiper-bundle.min.js', get_template_directory_uri() . '/assets/vendor/swiper/swiper-bundle.min.js', array(), '1.0.0', true );
+wp_enqueue_script( 'noframework.waypoints.js', get_template_directory_uri() . '/assets/vendor/waypoints/noframework.waypoints.js', array(), '1.0.0', true );
+wp_enqueue_script( 'validate.js', get_template_directory_uri() . '/assets/vendor/php-email-form/validate.js', array(), '1.0.0', true );
+
+}
+
+add_action( 'wp_enqueue_scripts', 'arshathemescripts' );
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 ?>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
